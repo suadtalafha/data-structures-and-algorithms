@@ -18,7 +18,7 @@ Becomes:
 ]
 ------------------------------------------------------------------------------------------------ */
 
-function transformToLis(obj){
+function transformToLis(obj) {
   // Solution code here...
   let newArray = [];
   let objToArr = Object.entries(obj);
@@ -41,6 +41,15 @@ For example, count(5, [[1, 3, 5, 7, 9], [5, 5, 5], [1, 2, 3]]) returns 4.
 
 const count = (target, input) => {
   // Solution code here...
+  let newArray = 0;
+  input.map(val => {
+    val.map(arr => {
+      if (target === arr) {
+        newArray++
+      }
+    })
+  })
+  return newArray
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -55,6 +64,15 @@ For example, [[1, 2, 3, 4, 5], [6, 7, 2, 4, 5, 7], [9, 2, 3, 6,]] returns 66.
 
 const totalSum = (input) => {
   // Solution code here...
+  let newArray = 0;
+  input.map(val => {
+    val.map(arr => {
+
+      newArray = newArray + arr
+
+    })
+  })
+  return newArray
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -71,6 +89,17 @@ For example, [ [0,2,5,4], [2,4,10], [] ] should return [ [1, 32], [1024], [] ].
 
 const divisibleByFiveTwoToThePower = (input) => {
   // Solution code here...
+  let newArray = [];
+  input.map((item, index) => {
+    newArray.push([]);
+    item.map(value => {
+      if (typeof (value) === 'number' && value % 5 === 0) {
+        let percentFiveValue = Math.pow(2, value);
+        newArray[index].push(percentFiveValue);
+      }
+    });
+  });
+  return newArray;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -137,6 +166,17 @@ let starWarsData = [{
 
 let findMaleAndFemale = (data) => {
   // Solution code here...
+  let result = "";
+  let newArry = [];
+  data.map(character => {
+    if (character.gender === 'female' || character.gender === 'male') {
+      newArry.push(character.name);
+    }
+  })
+
+  result = newArry.join(' and ');
+
+  return result;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -147,6 +187,20 @@ Write a function named findShortest that, given the Star Wars data from Challeng
 
 let findShortest = (data) => {
   // Solution code here...
+  
+  let newArr = data.sort((a, b) => {
+    if (parseInt(a.height) > parseInt(b.height)) {
+      return 1;
+    }
+    else if (parseInt(a.height) < parseInt(b.height)) {
+      return -1;
+    }
+    else {
+      return 0;
+    }
+  });
+
+  return newArr[0].name;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -162,8 +216,8 @@ Run your tests from the console: jest challenges-10.test.js
 
 describe('Testing challenge 1', () => {
   test('It should return a list of key value pairs inside of li tags', () => {
-    expect(transformToLis({name: 'bob', age: 32})[0]).toStrictEqual(`<li>name: bob</li>`);
-    expect(transformToLis({name: 'bob', age: 32})[1]).toStrictEqual(`<li>age: 32</li>`);
+    expect(transformToLis({ name: 'bob', age: 32 })[0]).toStrictEqual(`<li>name: bob</li>`);
+    expect(transformToLis({ name: 'bob', age: 32 })[1]).toStrictEqual(`<li>age: 32</li>`);
     expect(transformToLis({})).toStrictEqual([]);
   });
 });
